@@ -17,8 +17,8 @@ Dim strCharachters
 Dim excWB
 Dim logParse
 
-excWB = "C:\Users\Admin\Desktop\TPIE\test.xlsx"
-logParse = "C:\Users\Admin\Desktop\TPIE\upgrade.txt"
+excWB = "C:\<add Directory Here>\test.xlsx"
+logParse = "C:\<add Directory Here>\upgrade.txt"
 
 Set objFSO = CreateObject("Scripting.FileSystemObject")
 Set objFile = objFSO.OpenTextFile(logParse)
