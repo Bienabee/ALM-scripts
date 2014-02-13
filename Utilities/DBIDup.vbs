@@ -2,6 +2,7 @@
 
 Dim findConStr, findDB, findDir, FindPW, countStart
 
+'add comment
 
 Dim dbiParse 
 dbiParse = "C:\Users\Admin\Desktop\DBIDup\dbid.xml" '''InputBox("Paste the file path to the DBID.xml File Here" , "Include direct file path")
