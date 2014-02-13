@@ -1,8 +1,9 @@
 ''' This is the 1st iteration of the DBID.xml File updater '''
 
+
+
 Dim findConStr, findDB, findDir, FindPW, countStart
 
-'add comment
 
 Dim dbiParse 
 dbiParse = "C:\Users\Admin\Desktop\DBIDup\dbid.xml" '''InputBox("Paste the file path to the DBID.xml File Here" , "Include direct file path")
@@ -11,12 +12,17 @@ saveDir = "C:\Users\Admin\Desktop\DBIDup\dbid-backup.xml" 'dbiParse
 
 Set objFSO = CreateObject("Scripting.FileSystemObject")
 Set objFile = objFSO.OpenTextFile(dbiParse)
-Set objBackup = objFSO.CreateTextFile(saveDir, True)
+
+Set objFS = CreateObject("Scripting.FileSystemObject")
+Set objBackup = objFS.CreateTextFile(saveDir, True)
 
 objBackup.Write(objFile.ReadAll)
 
 objBackup.Close
 
+WScript.echo "Backup Saved... Begin dbid.xml update"
+
+Set objFile = objFSO.OpenTextFile(dbiParse)
 
 findConStr = "<DB_CONNSTR_FORMAT>"  '' 19 chars long
 findDB = "<DBSERVER_NAME>"
