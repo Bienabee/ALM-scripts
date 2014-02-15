@@ -1,6 +1,6 @@
 ''' This is the 1st iteration of the DBID.xml File updater '''
 
-
+'' LT 2/14/2014
 
 Dim findConStr, findDB, findDir, FindPW, countStart
 Const ForReading = 1, ForWriting = 2, ForAppending = 8 
