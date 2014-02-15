@@ -28,15 +28,15 @@ Set objFile = objFSO.OpenTextFile(dbiParse, ForWriting)
 Set objFileRead = objFS.OpenTextFile(saveDir, ForReading)
 
 findConStr = "<DB_CONNSTR_FORMAT>"  '' 19 chars long
-findDB = "<DBSERVER_NAME>"
-findDir = "<PHYSICAL_DIRECTORY>"
-findPW = "<DB_USER_PASS>"
+findDB = "<DBSERVER_NAME>"   '' 15 chars long
+findDir = "<PHYSICAL_DIRECTORY>"  '' 20 chars long
+findPW = "<DB_USER_PASS>"  '' 14 chars long
 
 Do Until objFileRead.AtEndOfStream 
     'strLine = objFileRead.ReadLine
 	strLine = objFileRead.ReadAll
 	strLineLen = (Len(strLine))
-	WScript.echo strLineLen
+'	WScript.echo strLineLen
 	
 	If (InStr(strLine, findConStr)) > 0 Then
         Wscript.echo strLine
@@ -61,16 +61,37 @@ Do Until objFileRead.AtEndOfStream
 		
 		WScript.echo strLine
 		'objFile.WriteLine strLine
-		objFile.Write strLine
 		
+		'' Looks like I only need to write the file once
+		
+		'objFile.Write strLine
+		
+	'End If
+	
+	''' Find and Replace DB '''
+'	ElseIf (InStr(strLine, findDB)) > 0 Then
+	
+		startDB = (InStr(strLine, findDB)) + 15
+		WScript.echo startDB
+		endDB = (InStrRev(strLine, "</DBSERVER_NAME>"))
+		WScript.echo endDB
+		
+		bEnd = endDB - startDB
+		WScript.echo bEnd
+		
+		aDB = (mid(strLine,startDB,bEnd))
+		bDB = "NEWDB"
+		
+		strLine = (Replace(strLine, aDB, bDB))
+		
+		objFile.Write strLine
+	
 	End If
+	
 	
 Loop
 
 
-'Set objFile = objFSO.OpenTextFile(dbiParse, ForWriting)
-
-	'objFile.WriteLine strLine
 
 objFile.Close
 objFileRead.Close
