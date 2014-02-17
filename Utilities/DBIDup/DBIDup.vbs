@@ -10,6 +10,7 @@ dbiParse = "C:\Users\Admin\Desktop\DBIDup\dbid.xml" '''InputBox("Paste the file 
 Dim saveDir 
 saveDir = "C:\Users\Admin\Desktop\DBIDup\dbid-backup.xml" 'dbiParse
 
+
 Set objFSO = CreateObject("Scripting.FileSystemObject")
 Set objFile = objFSO.OpenTextFile(dbiParse)
 
@@ -83,6 +84,42 @@ Do Until objFileRead.AtEndOfStream
 		bDB = "NEWDB"
 		
 		strLine = (Replace(strLine, aDB, bDB))
+		
+	'	objFile.Write strLine
+		
+	''' Find and Replace PhysicalDirectory '''
+'	ElseIf (InStr(strLine, findDB)) > 0 Then
+	
+		startDir = (InStr(strLine, findDir)) + 20
+		WScript.echo startDir
+		endDir = (InStrRev(strLine, "</PHYSICAL_DIRECTORY>"))
+		WScript.echo endDir
+		
+		cEnd = endDir - startDir
+		WScript.echo cEnd
+		
+		aDir = (mid(strLine,startDir,cEnd))
+		bDir = "c:\New\Directory\Folder"
+		
+		strLine = (Replace(strLine, aDir, bDir))
+		
+		'objFile.Write strLine
+	
+	''' Find and Replace Password '''
+'	ElseIf (InStr(strLine, findDB)) > 0 Then
+	
+		startPW = (InStr(strLine, findPW)) + 14
+		WScript.echo startPW
+		endPW = (InStrRev(strLine, "</DB_USER_PASS>"))
+		WScript.echo endPW
+		
+		dEnd = endPW - startPW
+		WScript.echo dEnd
+		
+		aPW = (mid(strLine,startPW,dEnd))
+		bPW = "Pa$$words1"
+		
+		strLine = (Replace(strLine, aPW, bPW))
 		
 		objFile.Write strLine
 	
