@@ -109,12 +109,12 @@ Do Until objFileRead.AtEndOfStream
 '	ElseIf (InStr(strLine, findDB)) > 0 Then
 	
 		startPW = (InStr(strLine, findPW)) + 14
-		WScript.echo startPW
+		'WScript.echo startPW
 		endPW = (InStrRev(strLine, "</DB_USER_PASS>"))
-		WScript.echo endPW
+		'WScript.echo endPW
 		
 		dEnd = endPW - startPW
-		WScript.echo dEnd
+		'WScript.echo dEnd
 		
 		aPW = (mid(strLine,startPW,dEnd))
 		bPW = "Pa$$words1"
