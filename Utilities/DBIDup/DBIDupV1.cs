@@ -38,8 +38,18 @@ namespace WindowsFormsApplication1
 
             int result = file_name.IndexOf("dbid");
 
-            MessageBox.Show("You found the dbid" + result.ToString());
+            MessageBox.Show("You found the dbid " + result.ToString());
 
+
+            // working from here///////////////////////
+            // http://msdn.microsoft.com/en-us/library/c6cfw35a(v=vs.110).aspx
+            //////////////////////////////
+            string sourceDir = @"C:\Users\Admin\Desktop\DBIDup\";
+            //string[] dbidList = Directory.GetFiles(sourceDir, "*.xml");
+
+
+            string fName = "dbid-backup.xml";
+                
 
 
        
@@ -61,6 +71,9 @@ namespace WindowsFormsApplication1
 
         private void button3_Click(object sender, EventArgs e)
         {
+            
+
+            // Used to find the end of the XML parameters 
             char[] startChar = { '<' };
 
             string findConStr = "<DB_CONNSTR_FORMAT>";
@@ -89,8 +102,29 @@ namespace WindowsFormsApplication1
             string oConStr = text.Substring(startConStr, oConStrLen);
 
             MessageBox.Show(oConStr);
-            
 
+
+        }
+
+        private void GetFile_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog of = new OpenFileDialog();
+            of.ShowDialog();
+            UserFileTextBox.Text = of.FileName;
+        }
+
+        private void ReadFilePath_Click(object sender, EventArgs e)
+        {
+            StreamReader sr = new StreamReader(UserFileTextBox.Text);
+            textBox1.Text = sr.ReadToEnd();
+            sr.Close();
+        }
+
+        private void UpdateText_Click(object sender, EventArgs e)
+        {
+            StreamWriter sw = new StreamWriter(UserFileTextBox.Text, true);
+            sw.WriteLine(textBoxToWrite.Text);
+            sw.Close();
         }
     }
 }
