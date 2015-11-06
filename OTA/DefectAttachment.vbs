@@ -12,6 +12,7 @@ Public Function UploadDefectAttachment() As Boolean
     Dim ExStrg As IExtendedStorage
     Dim rc
 
+' Adding comment
 ‘ Get the bug factory from the TDConnection.
     ‘tdc is the global TDConnection object.
     Set BugFact = tdc.BugFactory
